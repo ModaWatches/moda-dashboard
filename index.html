@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moda Inventory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="./style.css?v=3">
+</head>
+<body>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <!-- Moda SVG Logo: geometric watch crown + M letterform -->
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Moda Logo">
+        <rect x="2" y="6" width="28" height="20" rx="4" stroke="#4CAF7C" stroke-width="1.8" fill="none"/>
+        <rect x="13" y="2" width="6" height="4" rx="1.5" stroke="#4CAF7C" stroke-width="1.4" fill="none"/>
+        <circle cx="16" cy="16" r="7" stroke="#4CAF7C" stroke-width="1.4" fill="none"/>
+        <line x1="16" y1="11" x2="16" y2="16" stroke="#4CAF7C" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="16" y1="16" x2="19.5" y2="17.5" stroke="#4CAF7C" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="sidebar-logo-text">MODA</div>
+        <div class="sidebar-logo-sub">Inventory</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Overview</div>
+      <button class="nav-item active" data-view="dashboard" onclick="switchView('dashboard')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </button>
+
+      <div class="sidebar-section-label">Inventory</div>
+      <button class="nav-item" data-view="inventory" onclick="switchView('inventory')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        In Stock
+        <span class="nav-badge" id="navInStockCount">0</span>
+      </button>
+      <button class="nav-item" data-view="pending" onclick="switchView('pending')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Pending Payment
+        <span class="nav-badge nav-badge-warning" id="navPendingCount">0</span>
+      </button>
+      <button class="nav-item" data-view="sold" onclick="switchView('sold')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        Sold
+        <span class="nav-badge" id="navSoldCount">0</span>
+      </button>
+      <button class="nav-item" data-view="all" onclick="switchView('all')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        All Watches
+      </button>
+      <button class="nav-item" data-view="accessories" onclick="switchView('accessories')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 7V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/><line x1="12" y1="11" x2="12" y2="13"/></svg>
+        Accessories
+        <span class="nav-badge" id="navAccessoriesCount">0</span>
+      </button>
+
+      <div class="sidebar-section-label">People</div>
+      <button class="nav-item" data-view="deals" onclick="switchView('deals')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+        Deals
+        <span class="nav-badge nav-badge-warning" id="navDealsCount" style="display:none;">0</span>
+      </button>
+      <button class="nav-item" data-view="crm" onclick="switchView('crm')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Requests
+        <span class="nav-badge" id="navCrmCount">0</span>
+      </button>
+      <button class="nav-item" data-view="contacts" onclick="switchView('contacts')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Contacts
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="footer-attr">
+        <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Created with Perplexity Computer</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MOBILE OVERLAY -->
+  <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <h1 class="header-title" id="headerTitle">Dashboard</h1>
+    </div>
+    <div class="header-right">
+      <button class="btn btn-secondary btn-sm" onclick="exportCSV()" title="Export CSV">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export
+      </button>
+      <label class="btn btn-secondary btn-sm" style="cursor:pointer;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Import
+        <input type="file" class="file-input-hidden" accept=".csv" onchange="importCSV(this)">
+      </label>
+      <button class="theme-toggle" data-theme-toggle aria-label="Toggle theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="main" id="mainContent">
+
+    <!-- DASHBOARD VIEW -->
+    <div class="view active" id="view-dashboard">
+      <div class="unpaid-section" id="unpaidSection" style="display:none;">
+        <div class="unpaid-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span id="unpaidTitle">Needs Payment</span>
+        </div>
+        <div class="unpaid-list" id="unpaidList"></div>
+      </div>
+      <div class="reminder-section" id="reminderSection" style="display:none;">
+        <div class="reminder-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span id="reminderTitle">Client Follow-ups Due</span>
+        </div>
+        <div class="reminder-list" id="reminderList"></div>
+      </div>
+      <div class="opportunity-section" id="opportunitySection" style="display:none;">
+        <div class="opportunity-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <span id="opportunityTitle">Resell Opportunities</span>
+        </div>
+        <div class="opportunity-list" id="opportunityList"></div>
+      </div>
+      <div class="deals-alert-section" id="dealsAlertSection" style="display:none;">
+        <div class="deals-alert-header">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+          <span id="dealsAlertTitle">New Seller Deals</span>
+        </div>
+        <div id="dealsAlertList"></div>
+      </div>
+      <div class="kpi-grid" id="kpiGrid"></div>
+      <div class="charts-grid" id="chartsGrid">
+        <div class="chart-card">
+          <div class="chart-card-title">Monthly Profit</div>
+          <div class="chart-container"><canvas id="profitChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-title">Inventory by Brand</div>
+          <div class="chart-container"><canvas id="brandChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-title">Monthly Sales Volume</div>
+          <div class="chart-container"><canvas id="salesChart"></canvas></div>
+        </div>
+      </div>
+      <div class="dashboard-bottom-grid">
+        <div class="activity-card" id="activityCard">
+          <div class="activity-title">Recent Activity</div>
+          <div class="activity-list" id="activityList">
+            <div class="empty-state" style="padding:var(--space-8);">
+              <p style="color:var(--color-text-faint); font-size:var(--text-sm);">No recent activity</p>
+            </div>
+          </div>
+        </div>
+        <div class="activity-card" id="crmDashCard">
+          <div class="activity-title" style="display:flex;align-items:center;justify-content:space-between;">
+            <span>Client Requests</span>
+            <span class="badge badge-stock" id="crmDashCount" style="font-size:11px;">0</span>
+          </div>
+          <div class="activity-list" id="crmDashList">
+            <div class="empty-state" style="padding:var(--space-8);">
+              <p style="color:var(--color-text-faint); font-size:var(--text-sm);">No active requests</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PENDING PAYMENT VIEW -->
+    <div class="view" id="view-pending">
+      <div class="table-container">
+        <div class="table-toolbar">
+          <div class="search-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" placeholder="Search pending..." id="pendingSearch" oninput="filterTable('pending')">
+          </div>
+        </div>
+        <table class="data-table" id="pendingTable">
+          <thead>
+            <tr>
+              <th>Brand</th>
+              <th>Model</th>
+              <th>Ref #</th>
+              <th>Purchase Price</th>
+              <th>Seller</th>
+              <th>Bank Info</th>
+              <th>Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="pendingBody"></tbody>
+        </table>
+        <div class="empty-state" id="pendingEmpty" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <div class="empty-state-title">All payments confirmed</div>
+          <div class="empty-state-text">No watches are pending payment.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INVENTORY VIEW -->
+    <div class="view" id="view-inventory">
+      <div class="table-container">
+        <div class="table-toolbar">
+          <div class="search-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" placeholder="Search watches..." id="inventorySearch" oninput="filterTable('inventory')">
+          </div>
+          <div style="flex:1;"></div>
+          <button class="btn btn-secondary btn-sm" onclick="openBulkAddModal()" style="margin-right:var(--space-2);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg>
+            Bulk Add
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="openAddModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Watch
+          </button>
+        </div>
+        <div class="bulk-action-bar" id="inventoryBulkBar" style="display:none;">
+          <span class="bulk-count" id="inventoryBulkCount">0 selected</span>
+          <button class="btn btn-danger btn-sm" onclick="bulkDeleteWatches('inventory')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            Delete Selected
+          </button>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table" id="inventoryTable">
+            <thead>
+              <tr>
+                <th class="th-checkbox"><input type="checkbox" class="bulk-select-all" onchange="toggleSelectAll('inventory', this)"></th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Ref #</th>
+                <th>Dial</th>
+                <th>Condition</th>
+                <th>Purchase Date</th>
+                <th>Cost</th>
+                <th>Seller</th>
+                <th>Payment</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="inventoryBody"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="inventoryEmpty" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div class="empty-state-title">No watches in stock</div>
+          <div class="empty-state-text">Add your first timepiece to start tracking your inventory.</div>
+          <button class="btn btn-primary" onclick="openAddModal()">Add Your First Watch</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOLD VIEW -->
+    <div class="view" id="view-sold">
+      <div class="table-container">
+        <div class="table-toolbar">
+          <div class="search-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" placeholder="Search sold watches..." id="soldSearch" oninput="filterTable('sold')">
+          </div>
+        </div>
+        <div class="bulk-action-bar" id="soldBulkBar" style="display:none;">
+          <span class="bulk-count" id="soldBulkCount">0 selected</span>
+          <button class="btn btn-danger btn-sm" onclick="bulkDeleteWatches('sold')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            Delete Selected
+          </button>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table" id="soldTable">
+            <thead>
+              <tr>
+                <th class="th-checkbox"><input type="checkbox" class="bulk-select-all" onchange="toggleSelectAll('sold', this)"></th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Cost</th>
+                <th>Sold Price</th>
+                <th>Profit</th>
+                <th>Margin %</th>
+                <th>Buyer</th>
+                <th>Hold Time</th>
+              </tr>
+            </thead>
+            <tbody id="soldBody"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="soldEmpty" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <div class="empty-state-title">No sold watches yet</div>
+          <div class="empty-state-text">Mark watches as sold to see your sales performance here.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALL WATCHES VIEW -->
+    <div class="view" id="view-all">
+      <div class="table-container">
+        <div class="table-toolbar">
+          <div class="search-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" placeholder="Search all watches..." id="allSearch" oninput="filterTable('all')">
+          </div>
+          <div style="flex:1;"></div>
+          <button class="btn btn-secondary btn-sm" onclick="openBulkAddModal()" style="margin-right:var(--space-2);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="18" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/></svg>
+            Bulk Add
+          </button>
+          <button class="btn btn-primary btn-sm" onclick="openAddModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Watch
+          </button>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table" id="allTable">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Ref #</th>
+                <th>Material</th>
+                <th>Condition</th>
+                <th>Cost</th>
+                <th>Sold Price</th>
+                <th>Profit</th>
+              </tr>
+            </thead>
+            <tbody id="allBody"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="allEmpty" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <div class="empty-state-title">No watches yet</div>
+          <div class="empty-state-text">Start building your collection by adding a watch.</div>
+          <button class="btn btn-primary" onclick="openAddModal()">Add Your First Watch</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEALS VIEW -->
+    <div class="view" id="view-deals">
+      <div class="table-container">
+        <div class="table-toolbar">
+          <div class="search-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" placeholder="Search deals..." id="dealsSearch" oninput="filterTable('deals')">
+          </div>
+          <div style="flex:1;"></div>
+          <div class="deals-filter-group">
+            <button class="btn btn-secondary btn-sm deals-filter active" data-filter="active" onclick="filterDeals('active')">Active</button>
+            <button class="btn btn-secondary btn-sm deals-filter" data-filter="approved" onclick="filterDeals('approved')">Approved</button>
+            <button class="btn btn-secondary btn-sm deals-filter" data-filter="all" onclick="filterDeals('all')">All</button>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="copyIntakeFormLink()" style="margin-left:var(--space-2);white-space:nowrap;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px;margin-right:4px;"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            Copy Seller Link
+          </button>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table" id="dealsTable">
+            <thead>
+              <tr>
+                <th>Ref Code</th>
+                <th>Seller</th>
+                <th>Watch</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="dealsBody"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="dealsEmpty" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>
+          <div class="empty-state-title">No seller deals yet</div>
+          <div class="empty-state-text">Deals submitted by sellers through the intake form will appear here.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CRM / REQUESTS VIEW -->
+    <div class="view" id="view-crm">
+      <div class="table-container">
+        <div class="table-toolbar">
+          <div class="search-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" placeholder="Search requests..." id="crmSearch" oninput="filterTable('crm')">
+          </div>
+          <div style="flex:1;"></div>
+          <button class="btn btn-primary btn-sm" onclick="openCrmModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Request
+          </button>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table" id="crmTable">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Client</th>
+                <th>Watch</th>
+                <th>Budget</th>
+                <th>Source</th>
+                <th>Date</th>
+                <th>Notes</th>
+                <th>Reminder</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="crmBody"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="crmEmpty" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <div class="empty-state-title">No client requests yet</div>
+          <div class="empty-state-text">Track watches your clients are looking for.</div>
+          <button class="btn btn-primary" onclick="openCrmModal()">Add First Request</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACTS VIEW -->
+    <div class="view" id="view-contacts">
+      <div class="contacts-toolbar">
+        <div class="search-wrapper">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="search-input" placeholder="Search contacts..." id="contactsSearch" oninput="filterContacts()">
+        </div>
+        <div class="contacts-filter-chips">
+          <button class="chip chip-active" data-contact-filter="all" onclick="setContactFilter('all')">All</button>
+          <button class="chip" data-contact-filter="seller" onclick="setContactFilter('seller')">Sellers</button>
+          <button class="chip" data-contact-filter="buyer" onclick="setContactFilter('buyer')">Buyers</button>
+        </div>
+      </div>
+      <div class="contacts-list" id="contactsList"></div>
+    </div>
+
+    <!-- ACCESSORIES VIEW -->
+    <div class="view" id="view-accessories">
+      <div class="table-container">
+        <div class="table-toolbar">
+          <div class="search-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-input" placeholder="Search accessories..." id="accessoriesSearch" oninput="filterTable('accessories')">
+          </div>
+          <div style="flex:1;"></div>
+          <button class="btn btn-primary btn-sm" onclick="openAccessoryModal()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add Accessory
+          </button>
+        </div>
+        <div class="bulk-action-bar" id="accessoriesBulkBar" style="display:none;">
+          <span class="bulk-count" id="accessoriesBulkCount">0 selected</span>
+          <button class="btn btn-danger btn-sm" onclick="bulkDeleteAccessories()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            Delete Selected
+          </button>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table" id="accessoriesTable">
+            <thead>
+              <tr>
+                <th class="th-checkbox"><input type="checkbox" class="bulk-select-all" onchange="toggleSelectAll('accessories', this)"></th>
+                <th>Type</th>
+                <th>Brand</th>
+                <th>Description</th>
+                <th>Compatible Watch</th>
+                <th>Condition</th>
+                <th>Cost</th>
+                <th>Status</th>
+                <th>Payment</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="accessoriesBody"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="accessoriesEmpty" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 7V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/><line x1="12" y1="11" x2="12" y2="13"/></svg>
+          <div class="empty-state-title">No accessories yet</div>
+          <div class="empty-state-text">Track bracelets, straps, and boxes for your collection.</div>
+          <button class="btn btn-primary" onclick="openAccessoryModal()">Add First Accessory</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ADD/EDIT WATCH MODAL -->
+<div class="modal-overlay" id="watchModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalTitle">Add Watch</h2>
+      <button class="btn-ghost btn-icon" onclick="closeModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form id="watchForm" class="form-grid" onsubmit="return false;">
+        <input type="hidden" id="formWatchId">
+
+        <div class="form-section-title">Watch Details</div>
+
+        <div class="form-group">
+          <label class="form-label">Brand *</label>
+          <select class="form-select" id="formBrand" required>
+            <option value="">Select Brand</option>
+            <option>Rolex</option>
+            <option>Patek Philippe</option>
+            <option>Audemars Piguet</option>
+            <option>Richard Mille</option>
+            <option>Omega</option>
+            <option>Cartier</option>
+            <option>IWC</option>
+            <option>Jaeger-LeCoultre</option>
+            <option>Vacheron Constantin</option>
+            <option>A. Lange & Söhne</option>
+            <option>Breguet</option>
+            <option>Hublot</option>
+            <option>Tudor</option>
+            <option>Panerai</option>
+            <option>Breitling</option>
+            <option>TAG Heuer</option>
+            <option>Zenith</option>
+            <option>Grand Seiko</option>
+            <option>F.P. Journe</option>
+            <option value="__other__">Other…</option>
+          </select>
+        </div>
+        <div class="form-group" id="customBrandGroup" style="display:none;">
+          <label class="form-label">Custom Brand</label>
+          <input type="text" class="form-input" id="formCustomBrand" placeholder="Enter brand name">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Model *</label>
+          <input type="text" class="form-input" id="formModel" placeholder="e.g. Submariner Date" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Reference Number</label>
+          <input type="text" class="form-input" id="formRefNum" placeholder="e.g. 126610LN">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Serial Number</label>
+          <input type="text" class="form-input" id="formSerialNum" placeholder="e.g. 3R5X7Y2K">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Dial Color</label>
+          <input type="text" class="form-input" id="formDial" placeholder="e.g. Black, Blue, White">
+        </div>
+        <input type="hidden" id="formMaterial" value="">
+        <div class="form-group">
+          <label class="form-label">Condition</label>
+          <select class="form-select" id="formCondition">
+            <option value="">Select Condition</option>
+            <option>New/Unworn</option>
+            <option>Pre-Owned Excellent</option>
+            <option>Pre-Owned Good</option>
+            <option>Pre-Owned Fair</option>
+          </select>
+        </div>
+        <input type="hidden" id="formMovement" value="">
+        <div class="form-group">
+          <label class="form-label">Warranty Date</label>
+          <input type="date" class="form-input" id="formWarrantyDate">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Box & Papers</label>
+          <select class="form-select" id="formBoxPapers">
+            <option value="">Select</option>
+            <option>Full Set</option>
+            <option>Box Only</option>
+            <option>Papers Only</option>
+            <option>None</option>
+          </select>
+        </div>
+
+        <div class="form-section-title">Purchase Information</div>
+
+        <div class="form-group">
+          <label class="form-label">Purchase Date</label>
+          <input type="date" class="form-input" id="formPurchaseDate">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Purchase Price ($)</label>
+          <input type="number" class="form-input" id="formPurchasePrice" placeholder="0.00" min="0" step="0.01">
+        </div>
+
+        <div class="form-row form-row-3e">
+          <div class="form-group autocomplete-group">
+            <label class="form-label">Seller Name</label>
+            <input type="text" class="form-input" id="formSellerName" placeholder="e.g. Crown & Caliber" autocomplete="off">
+            <div class="returning-dropdown" id="sellerNameDropdown"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" id="formSellerEmail" placeholder="e.g. seller@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-input" id="formSellerPhone" placeholder="e.g. (555) 123-4567">
+          </div>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Street Address</label>
+          <input type="text" class="form-input" id="formSellerAddress" placeholder="e.g. 123 Main St">
+        </div>
+        <div class="form-row form-row-3">
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <input type="text" class="form-input" id="formSellerAddressCity" placeholder="e.g. New York">
+          </div>
+          <div class="form-group">
+            <label class="form-label">State</label>
+            <input type="text" class="form-input" id="formSellerAddressState" placeholder="NY" maxlength="2" style="text-transform:uppercase;">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Zip Code</label>
+            <input type="text" class="form-input" id="formSellerAddressZip" placeholder="10001" maxlength="10">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Wire Confirmation #</label>
+          <input type="text" class="form-input" id="formWireConfirmation" placeholder="e.g. WR-20260301-4829">
+        </div>
+        <div class="form-section-title">Wire Instructions</div>
+        <div class="form-row form-row-2">
+          <div class="form-group">
+            <label class="form-label">Bank Name</label>
+            <input type="text" class="form-input" id="formSellerBankName" placeholder="e.g. Chase">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Routing Number</label>
+            <input type="text" class="form-input" id="formSellerRoutingNumber" placeholder="e.g. 021000021" maxlength="9">
+          </div>
+        </div>
+        <div class="form-row form-row-2">
+          <div class="form-group">
+            <label class="form-label">Account Number</label>
+            <input type="text" class="form-input" id="formSellerAccountNumber" placeholder="e.g. 1234567890">
+          </div>
+          <div class="form-group">
+            <label class="form-label">SWIFT Code</label>
+            <input type="text" class="form-input" id="formSellerSwiftCode" placeholder="e.g. CHASUS33">
+          </div>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Seller Notes</label>
+          <textarea class="form-input form-textarea" id="formSellerNotes" placeholder="Notes about the seller or transaction..."></textarea>
+        </div>
+
+        <!-- Sale fields (shown when editing sold or marking as sold) -->
+        <div id="saleFields" style="display:none; contents;">
+          <div class="form-section-title">Sale Information</div>
+          <div class="form-group">
+            <label class="form-label">Sold Date</label>
+            <input type="date" class="form-input" id="formSoldDate">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sold Price ($)</label>
+            <input type="number" class="form-input" id="formSoldPrice" placeholder="0.00" min="0" step="0.01">
+          </div>
+          <div class="form-row form-row-3e">
+            <div class="form-group autocomplete-group">
+              <label class="form-label">Buyer Name</label>
+              <input type="text" class="form-input" id="formBuyerName" placeholder="e.g. John Smith" autocomplete="off">
+              <div class="returning-dropdown" id="formBuyerNameDropdown"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-input" id="formBuyerEmail" placeholder="e.g. buyer@email.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <input type="tel" class="form-input" id="formBuyerPhone" placeholder="e.g. (555) 987-6543">
+            </div>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Street Address</label>
+            <input type="text" class="form-input" id="formBuyerAddress" placeholder="e.g. 456 Oak Ave">
+          </div>
+          <div class="form-row form-row-3">
+            <div class="form-group">
+              <label class="form-label">City</label>
+              <input type="text" class="form-input" id="formBuyerAddressCity" placeholder="e.g. Miami">
+            </div>
+            <div class="form-group">
+              <label class="form-label">State</label>
+              <input type="text" class="form-input" id="formBuyerAddressState" placeholder="FL" maxlength="2" style="text-transform:uppercase;">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Zip Code</label>
+              <input type="text" class="form-input" id="formBuyerAddressZip" placeholder="33101" maxlength="10">
+            </div>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Buyer Notes</label>
+            <textarea class="form-input form-textarea" id="formBuyerNotes" placeholder="Notes about the buyer..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-section-title">Additional</div>
+        <div class="form-group full">
+          <label class="form-label">Notes</label>
+          <textarea class="form-input form-textarea" id="formNotes" placeholder="General notes..."></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" id="modalSaveBtn" onclick="saveWatch()">Add Watch</button>
+    </div>
+  </div>
+</div>
+
+<!-- SELL MODAL -->
+<div class="modal-overlay" id="sellModal">
+  <div class="modal" style="max-width:600px;">
+    <div class="modal-header">
+      <h2 class="modal-title">Mark as Sold</h2>
+      <button class="btn-ghost btn-icon" onclick="closeSellModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <input type="hidden" id="sellWatchId">
+        <div class="form-group">
+          <label class="form-label">Sold Price ($) *</label>
+          <input type="number" class="form-input" id="sellPrice" placeholder="0.00" min="0" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sold Date</label>
+          <input type="date" class="form-input" id="sellDate">
+        </div>
+        <div class="form-row form-row-3e">
+          <div class="form-group autocomplete-group">
+            <label class="form-label">Buyer Name</label>
+            <input type="text" class="form-input" id="sellBuyer" placeholder="e.g. John Smith" autocomplete="off">
+            <div class="returning-dropdown" id="sellBuyerDropdown"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" id="sellBuyerEmail" placeholder="e.g. buyer@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-input" id="sellBuyerPhone" placeholder="e.g. (555) 987-6543">
+          </div>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Buyer Address</label>
+          <input type="text" class="form-input" id="sellBuyerAddress" placeholder="e.g. 456 Oak Ave">
+        </div>
+        <div class="form-row form-row-3">
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <input type="text" class="form-input" id="sellBuyerAddressCity" placeholder="e.g. Miami">
+          </div>
+          <div class="form-group">
+            <label class="form-label">State</label>
+            <input type="text" class="form-input" id="sellBuyerAddressState" placeholder="FL" maxlength="2" style="text-transform:uppercase;">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Zip Code</label>
+            <input type="text" class="form-input" id="sellBuyerAddressZip" placeholder="33101" maxlength="10">
+          </div>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Buyer Notes</label>
+          <textarea class="form-input form-textarea" id="sellNotes" placeholder="Notes about the sale..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeSellModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="confirmSell()">Confirm Sale</button>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal" style="max-width:560px;">
+    <div class="modal-header">
+      <h2 class="modal-title" id="detailTitle">Watch Details</h2>
+      <button class="btn-ghost btn-icon" onclick="closeDetailModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="detailBody"></div>
+    <div class="modal-footer" id="detailFooter"></div>
+  </div>
+</div>
+
+<!-- CRM REQUEST MODAL -->
+<div class="modal-overlay" id="crmModal">
+  <div class="modal" style="max-width:480px;">
+    <div class="modal-header">
+      <h2 class="modal-title" id="crmModalTitle">Add Request</h2>
+      <button class="btn-ghost btn-icon" onclick="closeCrmModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid" style="grid-template-columns:1fr 1fr;">
+        <input type="hidden" id="crmFormId">
+        <div class="form-group">
+          <label class="form-label">Client Name *</label>
+          <input type="text" class="form-input" id="crmClient" placeholder="e.g. John Smith" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Client Phone/Contact</label>
+          <input type="text" class="form-input" id="crmContact" placeholder="e.g. 555-1234">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Lead Source</label>
+          <select class="form-select" id="crmSource">
+            <option value="">Select Source</option>
+            <option>Facebook</option>
+            <option>Community</option>
+            <option>Text</option>
+            <option>Email</option>
+            <option>Referral</option>
+            <option>Instagram</option>
+            <option>WhatsApp</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Watch Requested *</label>
+          <input type="text" class="form-input" id="crmWatch" placeholder="e.g. Rolex Submariner 126610LN" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Budget</label>
+          <input type="number" class="form-input" id="crmBudget" placeholder="0" min="0" step="1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <select class="form-select" id="crmStatus">
+            <option value="looking">Looking</option>
+            <option value="sourced">Sourced</option>
+            <option value="offered">Offered</option>
+            <option value="fulfilled">Fulfilled</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Reminder Alert</label>
+          <select class="form-select" id="crmReminderDays">
+            <option value="">No Reminder</option>
+            <option value="3">Every 3 Days</option>
+            <option value="5">Every 5 Days</option>
+            <option value="7">Every 7 Days</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Notes</label>
+          <textarea class="form-input form-textarea" id="crmNotes" placeholder="Specs, preferences, urgency..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeCrmModal()">Cancel</button>
+      <button class="btn btn-primary" id="crmSaveBtn" onclick="saveCrmRequest()">Add Request</button>
+    </div>
+  </div>
+</div>
+
+<!-- ACCESSORY ADD/EDIT MODAL -->
+<div class="modal-overlay" id="accessoryModal">
+  <div class="modal" style="max-width:540px;">
+    <div class="modal-header">
+      <h2 class="modal-title" id="accModalTitle">Add Accessory</h2>
+      <button class="btn-ghost btn-icon" onclick="closeAccessoryModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form id="accessoryForm" class="form-grid" onsubmit="return false;">
+        <input type="hidden" id="accFormId">
+
+        <div class="form-section-title">Accessory Details</div>
+
+        <div class="form-group">
+          <label class="form-label">Type *</label>
+          <select class="form-select" id="accFormType" required>
+            <option value="Bracelet">Bracelet</option>
+            <option value="Strap">Strap</option>
+            <option value="Box">Box</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Brand *</label>
+          <input type="text" class="form-input" id="accFormBrand" placeholder="e.g. Rolex, Omega" required>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Description</label>
+          <input type="text" class="form-input" id="accFormDescription" placeholder="e.g. Jubilee 20mm, Rubber OEM">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Compatible Watch</label>
+          <input type="text" class="form-input" id="accFormCompatWatch" placeholder="e.g. Submariner 126610">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Condition</label>
+          <select class="form-select" id="accFormCondition">
+            <option value="">Select Condition</option>
+            <option>New/Unworn</option>
+            <option>Excellent</option>
+            <option>Good</option>
+            <option>Fair</option>
+          </select>
+        </div>
+
+        <div class="form-section-title">Purchase Information</div>
+
+        <div class="form-group">
+          <label class="form-label">Purchase Date</label>
+          <input type="date" class="form-input" id="accFormPurchaseDate">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Purchase Price ($)</label>
+          <input type="number" class="form-input" id="accFormPurchasePrice" placeholder="0.00" min="0" step="0.01">
+        </div>
+        <div class="form-row form-row-3e">
+          <div class="form-group">
+            <label class="form-label">Seller Name</label>
+            <input type="text" class="form-input" id="accFormSeller" placeholder="e.g. Watch Parts Co">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" id="accFormSellerEmail" placeholder="e.g. seller@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-input" id="accFormSellerPhone" placeholder="e.g. (555) 123-4567">
+          </div>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Seller Address</label>
+          <input type="text" class="form-input" id="accFormSellerAddress" placeholder="e.g. 123 Main St">
+        </div>
+        <div class="form-row form-row-3">
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <input type="text" class="form-input" id="accFormSellerAddressCity" placeholder="e.g. New York">
+          </div>
+          <div class="form-group">
+            <label class="form-label">State</label>
+            <input type="text" class="form-input" id="accFormSellerAddressState" placeholder="NY" maxlength="2" style="text-transform:uppercase;">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Zip Code</label>
+            <input type="text" class="form-input" id="accFormSellerAddressZip" placeholder="10001" maxlength="10">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Wire Confirmation #</label>
+          <input type="text" class="form-input" id="accFormWire" placeholder="e.g. WR-20260301-1234">
+        </div>
+
+        <!-- Sale fields for sold accessories -->
+        <div id="accSaleFields" style="display:none; contents;">
+          <div class="form-section-title">Sale Information</div>
+          <div class="form-group">
+            <label class="form-label">Sold Date</label>
+            <input type="date" class="form-input" id="accFormSoldDate">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sold Price ($)</label>
+            <input type="number" class="form-input" id="accFormSoldPrice" placeholder="0.00" min="0" step="0.01">
+          </div>
+          <div class="form-row form-row-3e">
+            <div class="form-group">
+              <label class="form-label">Buyer Name</label>
+              <input type="text" class="form-input" id="accFormBuyer" placeholder="e.g. John Smith">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-input" id="accFormBuyerEmail" placeholder="e.g. buyer@email.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <input type="tel" class="form-input" id="accFormBuyerPhone" placeholder="e.g. (555) 987-6543">
+            </div>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Buyer Address</label>
+            <input type="text" class="form-input" id="accFormBuyerAddress" placeholder="e.g. 456 Oak Ave">
+          </div>
+          <div class="form-row form-row-3">
+            <div class="form-group">
+              <label class="form-label">City</label>
+              <input type="text" class="form-input" id="accFormBuyerAddressCity" placeholder="e.g. Miami">
+            </div>
+            <div class="form-group">
+              <label class="form-label">State</label>
+              <input type="text" class="form-input" id="accFormBuyerAddressState" placeholder="FL" maxlength="2" style="text-transform:uppercase;">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Zip Code</label>
+              <input type="text" class="form-input" id="accFormBuyerAddressZip" placeholder="33101" maxlength="10">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section-title">Additional</div>
+        <div class="form-group full">
+          <label class="form-label">Notes</label>
+          <textarea class="form-input form-textarea" id="accFormNotes" placeholder="General notes..."></textarea>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeAccessoryModal()">Cancel</button>
+      <button class="btn btn-primary" id="accModalSaveBtn" onclick="saveAccessory()">Add Accessory</button>
+    </div>
+  </div>
+</div>
+
+<!-- ACCESSORY SELL MODAL -->
+<div class="modal-overlay" id="accSellModal">
+  <div class="modal" style="max-width:600px;">
+    <div class="modal-header">
+      <h2 class="modal-title">Mark as Sold</h2>
+      <button class="btn-ghost btn-icon" onclick="closeAccSellModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <input type="hidden" id="accSellId">
+        <div class="form-group">
+          <label class="form-label">Sold Price ($) *</label>
+          <input type="number" class="form-input" id="accSellPrice" placeholder="0.00" min="0" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sold Date</label>
+          <input type="date" class="form-input" id="accSellDate">
+        </div>
+        <div class="form-row form-row-3e">
+          <div class="form-group">
+            <label class="form-label">Buyer Name</label>
+            <input type="text" class="form-input" id="accSellBuyer" placeholder="e.g. John Smith">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" id="accSellBuyerEmail" placeholder="e.g. buyer@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-input" id="accSellBuyerPhone" placeholder="e.g. (555) 987-6543">
+          </div>
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Buyer Address</label>
+          <input type="text" class="form-input" id="accSellBuyerAddress" placeholder="e.g. 456 Oak Ave">
+        </div>
+        <div class="form-row form-row-3">
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <input type="text" class="form-input" id="accSellBuyerAddressCity" placeholder="e.g. Miami">
+          </div>
+          <div class="form-group">
+            <label class="form-label">State</label>
+            <input type="text" class="form-input" id="accSellBuyerAddressState" placeholder="FL" maxlength="2" style="text-transform:uppercase;">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Zip Code</label>
+            <input type="text" class="form-input" id="accSellBuyerAddressZip" placeholder="33101" maxlength="10">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeAccSellModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="confirmAccSell()">Confirm Sale</button>
+    </div>
+  </div>
+</div>
+
+<!-- ACCESSORY DETAIL MODAL -->
+<div class="modal-overlay" id="accDetailModal">
+  <div class="modal" style="max-width:560px;">
+    <div class="modal-header">
+      <h2 class="modal-title" id="accDetailTitle">Accessory Details</h2>
+      <button class="btn-ghost btn-icon" onclick="closeAccDetailModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="accDetailBody"></div>
+    <div class="modal-footer" id="accDetailFooter"></div>
+  </div>
+</div>
+
+<!-- DEAL DETAIL MODAL -->
+<div class="modal-overlay" id="dealDetailModal">
+  <div class="modal" style="max-width:640px;">
+    <div class="modal-header">
+      <h2 class="modal-title" id="dealDetailTitle">Deal Details</h2>
+      <button class="btn-ghost btn-icon" onclick="closeDealDetailModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="dealDetailBody" style="padding:0;"></div>
+    <div class="modal-footer" id="dealDetailFooter"></div>
+  </div>
+</div>
+
+<!-- DEAL APPROVE MODAL -->
+<div class="modal-overlay" id="dealApproveModal">
+  <div class="modal" style="max-width:480px;">
+    <div class="modal-header">
+      <h2 class="modal-title">Approve Deal to Inventory</h2>
+      <button class="btn-ghost btn-icon" onclick="closeDealApproveModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin:0 0 var(--space-4);">This will create a new watch in your inventory from this deal. Fill in any additional details.</p>
+      <div class="form-grid" style="grid-template-columns:1fr 1fr;">
+        <input type="hidden" id="approveDealId">
+        <div class="form-group">
+          <label class="form-label">Purchase Price ($)</label>
+          <input type="number" class="form-input" id="approvePrice" placeholder="0.00" min="0" step="0.01">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Condition</label>
+          <select class="form-select" id="approveCondition">
+            <option value="">Select Condition</option>
+            <option>New/Unworn</option>
+            <option>Pre-Owned Excellent</option>
+            <option>Pre-Owned Good</option>
+            <option>Pre-Owned Fair</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Box & Papers</label>
+          <select class="form-select" id="approveBoxPapers">
+            <option value="">Select</option>
+            <option>Full Set</option>
+            <option>Box Only</option>
+            <option>Papers Only</option>
+            <option>None</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Warranty Date</label>
+          <input type="date" class="form-input" id="approveWarrantyDate">
+        </div>
+        <div class="form-group" style="grid-column:1/-1;">
+          <label class="form-label">Dial Color</label>
+          <input type="text" class="form-input" id="approveDialColor" placeholder="e.g. Black, Blue, White">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeDealApproveModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="confirmApproveDeal()">Approve &amp; Add to Inventory</button>
+    </div>
+  </div>
+</div>
+
+<!-- DEAL STATUS UPDATE MODAL -->
+<div class="modal-overlay" id="dealStatusModal">
+  <div class="modal" style="max-width:400px;">
+    <div class="modal-header">
+      <h2 class="modal-title">Update Deal Status</h2>
+      <button class="btn-ghost btn-icon" onclick="closeDealStatusModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="statusDealId">
+      <div class="form-group">
+        <label class="form-label">New Status</label>
+        <select class="form-select" id="statusDealSelect">
+          <option value="deal_confirmed">Deal Confirmed</option>
+          <option value="label_sent">Shipping Label Sent</option>
+          <option value="in_transit">Watch In Transit</option>
+          <option value="delivered">Watch Delivered</option>
+          <option value="inspection_complete">Inspection Complete</option>
+          <option value="wire_sent">Wire Sent</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeDealStatusModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="confirmDealStatusUpdate()">Update Status</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- CONFIRM DELETE MODAL -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal" style="max-width:380px;">
+    <div class="modal-header">
+      <h2 class="modal-title">Delete Watch</h2>
+      <button class="btn-ghost btn-icon" onclick="cancelDelete()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" style="padding:var(--space-5) var(--space-6);">
+      <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin:0;">Are you sure you want to delete this watch? This action cannot be undone.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="cancelDelete()">Cancel</button>
+      <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT DETAIL MODAL -->
+<div class="modal-overlay" id="contactDetailModal">
+  <div class="modal" style="max-width:680px;">
+    <div class="modal-header">
+      <h2 class="modal-title" id="contactDetailTitle">Contact Profile</h2>
+      <button class="btn-ghost btn-icon" onclick="closeContactDetailModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="contactDetailBody" style="padding:0;">
+      <!-- Populated by JS -->
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger" onclick="deleteContact()" style="margin-right:auto;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="vertical-align:-2px;margin-right:4px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+        Delete
+      </button>
+      <button class="btn btn-secondary" onclick="closeContactDetailModal()">Close</button>
+      <button class="btn btn-primary" onclick="openEditContact()">Edit Contact</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT EDIT MODAL -->
+<div class="modal-overlay" id="contactEditModal">
+  <div class="modal" style="max-width:480px;">
+    <div class="modal-header">
+      <h2 class="modal-title">Edit Contact</h2>
+      <button class="btn-ghost btn-icon" onclick="closeContactEditModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group" style="grid-column:1/-1;">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-input" id="editContactName" placeholder="Contact name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="editContactEmail" placeholder="email@example.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input type="tel" class="form-input" id="editContactPhone" placeholder="(555) 123-4567">
+        </div>
+        <div class="form-group" style="grid-column:1/-1;">
+          <label class="form-label">Street Address</label>
+          <input type="text" class="form-input" id="editContactAddress" placeholder="123 Main St">
+        </div>
+        <div class="form-group">
+          <label class="form-label">City</label>
+          <input type="text" class="form-input" id="editContactAddressCity" placeholder="New York">
+        </div>
+        <div class="form-group">
+          <label class="form-label">State</label>
+          <input type="text" class="form-input" id="editContactAddressState" placeholder="NY" maxlength="2" style="text-transform:uppercase;">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Zip Code</label>
+          <input type="text" class="form-input" id="editContactAddressZip" placeholder="10001" maxlength="10">
+        </div>
+
+        <!-- Wire / Banking Info -->
+        <div style="grid-column:1/-1;border-top:1px solid var(--color-border);padding-top:var(--space-3);margin-top:var(--space-2);">
+          <label class="form-label" style="font-weight:600;color:var(--color-text);margin-bottom:var(--space-2);display:block;">Wire Information</label>
+        </div>
+        <div class="form-group" style="grid-column:1/-1;">
+          <label class="form-label">Bank Name</label>
+          <input type="text" class="form-input" id="editContactBankName" placeholder="Bank of America">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Routing Number</label>
+          <input type="text" class="form-input" id="editContactRoutingNumber" placeholder="021000021">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Account Number</label>
+          <input type="text" class="form-input" id="editContactAccountNumber" placeholder="123456789">
+        </div>
+        <div class="form-group">
+          <label class="form-label">SWIFT Code</label>
+          <input type="text" class="form-input" id="editContactSwiftCode" placeholder="BOFAUS3N" style="text-transform:uppercase;">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeContactEditModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveContactInfo()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- BULK ADD WATCHES MODAL -->
+<div class="modal-overlay" id="bulkAddModal">
+  <div class="modal" style="max-width:860px;">
+    <div class="modal-header">
+      <h2 class="modal-title">Bulk Add Watches</h2>
+      <button class="btn-ghost btn-icon" onclick="closeBulkAddModal()" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" style="padding:0;">
+
+      <!-- Seller Info (shared across all watches) -->
+      <div class="bulk-seller-section">
+        <div class="bulk-section-label">Seller Info (shared for all watches)</div>
+        <div class="form-grid">
+          <div class="form-group" style="position:relative;">
+            <label class="form-label">Seller Name</label>
+            <input type="text" class="form-input" id="bulkSellerName" placeholder="Start typing..." autocomplete="off">
+            <div class="returning-dropdown" id="bulkSellerNameDropdown"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" id="bulkSellerEmail" placeholder="email@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input type="tel" class="form-input" id="bulkSellerPhone" placeholder="(555) 123-4567">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Purchase Date</label>
+            <input type="date" class="form-input" id="bulkPurchaseDate">
+          </div>
+          <div class="form-group" style="grid-column:1/-1;">
+            <label class="form-label">Street Address</label>
+            <input type="text" class="form-input" id="bulkSellerAddress" placeholder="123 Main St">
+          </div>
+          <div class="form-group">
+            <label class="form-label">City</label>
+            <input type="text" class="form-input" id="bulkSellerCity" placeholder="New York">
+          </div>
+          <div class="form-group">
+            <label class="form-label">State</label>
+            <input type="text" class="form-input" id="bulkSellerState" placeholder="NY" maxlength="2" style="text-transform:uppercase;">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Zip</label>
+            <input type="text" class="form-input" id="bulkSellerZip" placeholder="10001" maxlength="10">
+          </div>
+        </div>
+      </div>
+
+      <!-- Watch rows -->
+      <div class="bulk-watches-section">
+        <div class="bulk-section-label">
+          Watches
+          <button class="btn btn-sm" onclick="addBulkWatchRow()" style="margin-left:auto;padding:2px 10px;font-size:12px;background:var(--color-primary);color:var(--color-bg);border:none;border-radius:var(--radius-md);cursor:pointer;">
+            + Add Watch
+          </button>
+        </div>
+        <div id="bulkWatchRows"></div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <div class="bulk-footer-count" id="bulkWatchCount">0 watches</div>
+      <button class="btn btn-secondary" onclick="closeBulkAddModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveBulkWatches()" id="bulkSaveBtn">Add All Watches</button>
+    </div>
+  </div>
+</div>
+
+<script src="./app.js?v=3"></script>
+</body>
+</html>
